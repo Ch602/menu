@@ -10,25 +10,18 @@
 
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { background-color: #000; }
+        body { background-color: #000; display: flex; align-items: center; justify-content: center; height: 100vh; }
         .swiper-container { width: 100vw; height: 100vh; }
+
+        /* 讓圖片可以自由縮放並拖動 */
         .swiper-slide { display: flex; align-items: center; justify-content: center; }
-
-        /* 允許圖片縮放 */
-        .swiper-zoom-container {
-            width: 100vw;
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-            touch-action: none; /* 確保縮放不被阻擋 */
-        }
-
         .swiper-zoom-container img {
-            max-width: 100%;
-            max-height: 100%;
-            object-fit: contain;
+            max-width: none;
+            max-height: none;
+            width: 100%;
+            height: 100%;
+            object-fit: contain; /* 確保圖片完整顯示 */
+            user-select: none; /* 避免選取 */
         }
     </style>
 </head>
@@ -78,7 +71,8 @@
             loop: false, // 不循環
             touchEventsTarget: 'container', // 確保觸控有效
             pagination: false, // 不顯示分頁小點
-            zoom: { maxRatio: 3, minRatio: 1 } // 啟用縮放，最多 3 倍
+            zoom: { maxRatio: 3, minRatio: 1 }, // 啟用縮放，最多 3 倍
+            allowTouchMove: true // 允許滑動
         });
     </script>
 
