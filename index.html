@@ -1,4 +1,4 @@
-!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="zh-TW">
 <head>
     <meta charset="UTF-8">
@@ -48,6 +48,7 @@
             left: 50%;
             transform: translateX(-50%);
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
         }
         
         .menu-button {
@@ -61,6 +62,7 @@
             font-weight: bold;
             width: 100%;
             text-align: center;
+            white-space: nowrap;
         }
         .menu-button:hover {
             background-color: #0056b3;
@@ -83,11 +85,11 @@
 
     <!-- 可收納的語言選擇按鈕 -->
     <div class="menu-container">
-        <button class="menu-toggle" onclick="toggleMenu()">選擇菜單</button>
+        <button class="menu-toggle" onclick="toggleMenu()">菜單語言 / Menu Language</button>
         <div class="menu-buttons" id="menuButtons">
-            <button class="menu-button" onclick="switchMenu('cn')">菜單 (中文)</button>
-            <button class="menu-button" onclick="switchMenu('en')">Menu (English)</button>
-            <button class="menu-button" onclick="switchMenu('jp')">メニュー (日本語)</button>
+            <button class="menu-button" onclick="switchMenu('cn')">菜單<br>(中文)</button>
+            <button class="menu-button" onclick="switchMenu('en')">Menu<br>(English)</button>
+            <button class="menu-button" onclick="switchMenu('jp')">メニュー<br>(日本語)</button>
         </div>
     </div>
 
