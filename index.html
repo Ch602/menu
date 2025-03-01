@@ -85,7 +85,7 @@
 
     <!-- 可收納的語言選擇按鈕 -->
     <div class="menu-container">
-        <button class="menu-toggle" onclick="toggleMenu()">Menu Language</button>
+        <button class="menu-toggle" onclick="toggleMenu()">菜單語言 / Menu Language</button>
         <div class="menu-buttons" id="menuButtons">
             <button class="menu-button" onclick="switchMenu('cn')">菜單<br>(中文)</button>
             <button class="menu-button" onclick="switchMenu('en')">Menu<br>(English)</button>
@@ -96,9 +96,7 @@
     <!-- Swiper 滑動容器 -->
     <div class="swiper-container">
         <div class="swiper-wrapper" id="menuWrapper">
-            <div class="swiper-slide"><div class="swiper-zoom-container"><img src="menu_cn_page1.jpg" alt="菜單第1頁"></div></div>
-            <div class="swiper-slide"><div class="swiper-zoom-container"><img src="menu_cn_page2.jpg" alt="菜單第2頁"></div></div>
-            <div class="swiper-slide"><div class="swiper-zoom-container"><img src="menu_cn_page3.jpg" alt="菜單第3頁"></div></div>
+            <!-- 頁面加載時自動載入完整中文菜單 -->
         </div>
     </div>
 
@@ -120,7 +118,7 @@
                 pagination: false,
                 zoom: { maxRatio: 2, minRatio: 1, toggle: false },
                 allowTouchMove: true,
-                speed: 300 // 提升流暢度
+                speed: 300
             });
         }
 
@@ -144,8 +142,13 @@
             menu.style.display = (menu.style.display === "flex") ? "none" : "flex";
         }
 
+        function loadDefaultMenu() {
+            switchMenu('cn'); // 頁面載入時顯示完整的中文菜單
+        }
+
         window.onload = function() {
-            initSwiper(); // 頁面加載後初始化 Swiper
+            initSwiper();
+            loadDefaultMenu(); // 頁面加載時載入完整菜單
         };
     </script>
 
