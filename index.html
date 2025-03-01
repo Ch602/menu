@@ -55,6 +55,7 @@
             transform: scale(1.05);
         }
 
+        /* 外帶按鈕 */
         .takeout-button {
             margin-top: 20px;
             background: linear-gradient(135deg, #FFD700, #FFA500);
@@ -78,15 +79,17 @@
 </head>
 <body>
 
+    <!-- 語言選擇畫面 -->
     <div class="language-selection" id="languageSelection">
         <div class="language-title">請選擇您的菜單語言</div>
         <div class="language-buttons">
             <button class="language-button" onclick="chooseLanguage('cn')">菜單 (中文)</button>
             <button class="language-button" onclick="chooseLanguage('en')">Menu (English)</button>
             <button class="language-button" onclick="chooseLanguage('jp')">メニュー (日本語)</button>
-            <button class="language-button takeout-button" onclick="chooseTakeout()">外帶菜單</button>
+            <button class="language-button takeout-button" onclick="chooseTakeout()">外帶菜單 (take-away)</button>
         </div>
     </div>
+
     <!-- Swiper 滑動容器 -->
     <div class="swiper-container" id="menuContainer">
         <div class="swiper-wrapper" id="menuWrapper"></div>
@@ -134,11 +137,20 @@
             menus[lang].forEach(src => {
                 let slide = document.createElement("div");
                 slide.className = "swiper-slide";
-                slide.innerHTML = `<div class="swiper-zoom-container"><img src="${src}" alt="菜單"></div>`;
+                slide.innerHTML = `<div class="swiper-zoom-container" ondblclick="toggleZoom(this)"><img src="${src}" alt="菜單"></div>`;
                 menuWrapper.appendChild(slide);
             });
 
             swiper.update();
+        }
+
+        function toggleZoom(element) {
+            let img = element.querySelector("img");
+            if (img.style.transform === "scale(2)") {
+                img.style.transform = "scale(1)";
+            } else {
+                img.style.transform = "scale(2)";
+            }
         }
 
         window.onload = function() {
