@@ -3,46 +3,56 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>菜單</title>
+    <title>選擇菜單語言</title>
     
     <!-- 引入 Swiper.js 的 CSS -->
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
 
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, sans-serif; }
-        body { background-color: #000; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; overflow: hidden; }
+        body { background-color: #000; display: flex; align-items: center; justify-content: center; height: 100vh; overflow: hidden; }
 
-        /* 底部固定菜單按鈕 */
-        .menu-container {
-            position: fixed;
-            bottom: 15px;
-            left: 50%;
-            transform: translateX(-50%);
+        /* 語言選擇畫面 */
+        .language-selection {
             display: flex;
-            gap: 10px;
-            background: rgba(0, 0, 0, 0.7);
-            padding: 8px 15px;
-            border-radius: 25px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0, 0, 0, 0.8);
+            width: 100vw;
+            height: 100vh;
+            position: fixed;
+            z-index: 1000;
         }
-
-        .menu-button {
+        .language-title {
+            color: white;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        .language-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        .language-button {
             padding: 12px 18px;
-            font-size: 14px;
+            font-size: 16px;
             border: none;
-            border-radius: 20px;
+            border-radius: 8px;
             cursor: pointer;
             background: linear-gradient(135deg, #007BFF, #0056b3);
             color: white;
             font-weight: bold;
+            width: 200px;
+            text-align: center;
             transition: all 0.3s ease-in-out;
         }
-        .menu-button:hover {
+        .language-button:hover {
             background: linear-gradient(135deg, #0056b3, #003d80);
-            transform: scale(1.1);
+            transform: scale(1.05);
         }
-
-        .swiper-container { width: 100vw; height: 100vh; }
+        
+        .swiper-container { width: 100vw; height: 100vh; display: none; }
         .swiper-slide { display: flex; align-items: center; justify-content: center; }
         .swiper-zoom-container img {
             max-width: none;
@@ -57,17 +67,19 @@
 </head>
 <body>
 
-    <!-- 底部固定的語言選擇按鈕 -->
-    <div class="menu-container">
-        <button class="menu-button" onclick="switchMenu('cn')">菜單 (中文)</button>
-        <button class="menu-button" onclick="switchMenu('en')">Menu (English)</button>
-        <button class="menu-button" onclick="switchMenu('jp')">メニュー (日本語)</button>
+    <!-- 語言選擇畫面 -->
+    <div class="language-selection" id="languageSelection">
+        <div class="language-title">請選擇您的菜單語言</div>
+        <div class="language-buttons">
+            <button class="language-button" onclick="chooseLanguage('cn')">菜單 (中文)</button>
+            <button class="language-button" onclick="chooseLanguage('en')">Menu (English)</button>
+            <button class="language-button" onclick="chooseLanguage('jp')">メニュー (日本語)</button>
+        </div>
     </div>
 
     <!-- Swiper 滑動容器 -->
-    <div class="swiper-container">
-        <div class="swiper-wrapper" id="menuWrapper">
-        </div>
+    <div class="swiper-container" id="menuContainer">
+        <div class="swiper-wrapper" id="menuWrapper"></div>
     </div>
 
     <!-- 引入 Swiper.js 的 JS -->
@@ -92,6 +104,12 @@
             });
         }
 
+        function chooseLanguage(lang) {
+            document.getElementById("languageSelection").style.display = "none";
+            document.getElementById("menuContainer").style.display = "block";
+            switchMenu(lang);
+        }
+
         function switchMenu(lang) {
             let menuWrapper = document.getElementById("menuWrapper");
             menuWrapper.innerHTML = "";
@@ -106,13 +124,8 @@
             swiper.update();
         }
 
-        function loadDefaultMenu() {
-            switchMenu('cn');
-        }
-
         window.onload = function() {
             initSwiper();
-            loadDefaultMenu();
         };
     </script>
 
