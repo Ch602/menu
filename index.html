@@ -3,21 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🎄 聖誕菜單 🎄</title>
+    <title>菜單</title>
     
     <!-- 引入 Swiper.js 的 CSS -->
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
 
     <style>
-        body { text-align: center; background-color: #f8f8f8; margin: 0; font-family: Arial, sans-serif; }
-        h1 { padding: 20px 0; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background-color: #000; overflow: hidden; }
         .swiper-container { width: 100vw; height: 100vh; }
-        .swiper-slide img { width: 100%; height: 100vh; object-fit: contain; }
+        .swiper-slide img { width: 100vw; height: 100vh; object-fit: cover; }
     </style>
 </head>
 <body>
-
-    <h1>🎄 聖誕菜單 🎄</h1>
 
     <!-- Swiper 滑動容器 -->
     <div class="swiper-container">
@@ -29,8 +27,6 @@
             <div class="swiper-slide"><img src="menu_page5.jpg" alt="菜單第5頁"></div>
             <div class="swiper-slide"><img src="menu_page6.jpg" alt="菜單第6頁"></div>
         </div>
-        <!-- 分頁指示點 -->
-        <div class="swiper-pagination"></div>
     </div>
 
     <!-- 引入 Swiper.js 的 JS -->
@@ -39,9 +35,8 @@
     <script>
         var swiper = new Swiper('.swiper-container', {
             loop: false, // 不循環，避免無限翻頁
-            pagination: { el: '.swiper-pagination', clickable: true }, // 加入分頁小點
-            navigation: false, // 不顯示導航按鈕
-            touchEventsTarget: 'container',
+            touchEventsTarget: 'container', // 確保觸控有效
+            pagination: false, // 不顯示分頁小點
         });
     </script>
 
