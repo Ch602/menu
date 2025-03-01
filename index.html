@@ -10,57 +10,57 @@
 
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { background-color: #000; display: flex; align-items: center; justify-content: center; height: 100vh; }
-        .swiper-container { width: 100vw; height: 100vh; }
+        body { background-color: #000; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; }
+        
+        /* 菜單選擇按鈕 */
+        .menu-buttons {
+            position: absolute;
+            top: 20px;
+            display: flex;
+            gap: 10px;
+        }
+        .menu-button {
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            background-color: #007BFF;
+            color: white;
+        }
+        .menu-button:hover {
+            background-color: #0056b3;
+        }
 
-        /* 讓圖片可以縮放，並且縮放更平滑 */
+        .swiper-container { width: 100vw; height: 100vh; }
         .swiper-slide { display: flex; align-items: center; justify-content: center; }
         .swiper-zoom-container img {
             max-width: none;
             max-height: none;
             width: 100%;
             height: 100%;
-            object-fit: contain; /* 確保圖片完整顯示 */
-            user-select: none; /* 避免選取 */
-            transition: transform 0.2s ease; /* 讓縮放更流暢 */
+            object-fit: contain;
+            user-select: none;
+            transition: transform 0.2s ease;
         }
     </style>
 </head>
 <body>
 
+    <!-- 菜單選擇按鈕 -->
+    <div class="menu-buttons">
+        <button class="menu-button" onclick="switchMenu('cn')">菜單 (中文)</button>
+        <button class="menu-button" onclick="switchMenu('en')">Menu (English)</button>
+        <button class="menu-button" onclick="switchMenu('jp')">メニュー (日本語)</button>
+    </div>
+
     <!-- Swiper 滑動容器 -->
     <div class="swiper-container">
-        <div class="swiper-wrapper">
-            <div class="swiper-slide">
-                <div class="swiper-zoom-container">
-                    <img src="menu_page1.jpg" alt="菜單第1頁">
-                </div>
-            </div>
-            <div class="swiper-slide">
-                <div class="swiper-zoom-container">
-                    <img src="menu_page2.jpg" alt="菜單第2頁">
-                </div>
-            </div>
-            <div class="swiper-slide">
-                <div class="swiper-zoom-container">
-                    <img src="menu_page3.jpg" alt="菜單第3頁">
-                </div>
-            </div>
-            <div class="swiper-slide">
-                <div class="swiper-zoom-container">
-                    <img src="menu_page4.jpg" alt="菜單第4頁">
-                </div>
-            </div>
-            <div class="swiper-slide">
-                <div class="swiper-zoom-container">
-                    <img src="menu_page5.jpg" alt="菜單第5頁">
-                </div>
-            </div>
-            <div class="swiper-slide">
-                <div class="swiper-zoom-container">
-                    <img src="menu_page6.jpg" alt="菜單第6頁">
-                </div>
-            </div>
+        <div class="swiper-wrapper" id="menuWrapper">
+            <!-- 預設顯示中文菜單 -->
+            <div class="swiper-slide"><div class="swiper-zoom-container"><img src="menu_cn_page1.jpg" alt="菜單第1頁"></div></div>
+            <div class="swiper-slide"><div class="swiper-zoom-container"><img src="menu_cn_page2.jpg" alt="菜單第2頁"></div></div>
+            <div class="swiper-slide"><div class="swiper-zoom-container"><img src="menu_cn_page3.jpg" alt="菜單第3頁"></div></div>
         </div>
     </div>
 
@@ -68,17 +68,40 @@
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 
     <script>
-        var swiper = new Swiper('.swiper-container', {
-            loop: false, // 不循環
-            touchEventsTarget: 'container', // 確保觸控有效
-            pagination: false, // 不顯示分頁小點
-            zoom: {
-                maxRatio: 2, // 最大放大倍數降到 2 倍
-                minRatio: 1, // 最小縮放倍數
-                toggle: false // 禁止點擊後自動放大，避免太敏感
-            },
-            allowTouchMove: true // 允許滑動
-        });
+        var swiper;
+        var menus = {
+            cn: ["menu_cn_page1.jpg", "menu_cn_page2.jpg", "menu_cn_page3.jpg"],
+            en: ["menu_en_page1.jpg", "menu_en_page2.jpg", "menu_en_page3.jpg"],
+            jp: ["menu_jp_page1.jpg", "menu_jp_page2.jpg", "menu_jp_page3.jpg"]
+        };
+
+        function initSwiper() {
+            swiper = new Swiper('.swiper-container', {
+                loop: false,
+                touchEventsTarget: 'container',
+                pagination: false,
+                zoom: { maxRatio: 2, minRatio: 1, toggle: false },
+                allowTouchMove: true
+            });
+        }
+
+        function switchMenu(lang) {
+            let menuWrapper = document.getElementById("menuWrapper");
+            menuWrapper.innerHTML = ""; // 清空現有內容
+
+            menus[lang].forEach(src => {
+                let slide = document.createElement("div");
+                slide.className = "swiper-slide";
+                slide.innerHTML = `<div class="swiper-zoom-container"><img src="${src}" alt="菜單"></div>`;
+                menuWrapper.appendChild(slide);
+            });
+
+            swiper.update(); // 更新 Swiper
+        }
+
+        window.onload = function() {
+            initSwiper(); // 頁面加載後初始化 Swiper
+        };
     </script>
 
 </body>
