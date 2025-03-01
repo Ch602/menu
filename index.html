@@ -18,16 +18,18 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            background: rgba(0, 0, 0, 0.8);
+            background: rgba(0, 0, 0, 0.85);
             width: 100vw;
             height: 100vh;
             position: fixed;
             z-index: 1000;
+            text-align: center;
         }
         .language-title {
             color: white;
-            font-size: 24px;
-            margin-bottom: 20px;
+            font-size: 26px;
+            margin-bottom: 25px;
+            font-weight: bold;
         }
         .language-buttons {
             display: flex;
@@ -35,21 +37,30 @@
             gap: 15px;
         }
         .language-button {
-            padding: 12px 18px;
-            font-size: 16px;
+            padding: 14px 20px;
+            font-size: 18px;
             border: none;
-            border-radius: 8px;
+            border-radius: 10px;
             cursor: pointer;
-            background: linear-gradient(135deg, #007BFF, #0056b3);
+            background: linear-gradient(135deg, #FF7E5F, #FD3A69);
             color: white;
             font-weight: bold;
-            width: 200px;
+            width: 220px;
             text-align: center;
             transition: all 0.3s ease-in-out;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
         .language-button:hover {
-            background: linear-gradient(135deg, #0056b3, #003d80);
+            background: linear-gradient(135deg, #FD3A69, #FF1E56);
             transform: scale(1.05);
+        }
+
+        .takeout-button {
+            margin-top: 20px;
+            background: linear-gradient(135deg, #FFD700, #FFA500);
+        }
+        .takeout-button:hover {
+            background: linear-gradient(135deg, #FFA500, #FF8C00);
         }
         
         .swiper-container { width: 100vw; height: 100vh; display: none; }
@@ -67,16 +78,15 @@
 </head>
 <body>
 
-    <!-- 語言選擇畫面 -->
     <div class="language-selection" id="languageSelection">
         <div class="language-title">請選擇您的菜單語言</div>
         <div class="language-buttons">
             <button class="language-button" onclick="chooseLanguage('cn')">菜單 (中文)</button>
             <button class="language-button" onclick="chooseLanguage('en')">Menu (English)</button>
             <button class="language-button" onclick="chooseLanguage('jp')">メニュー (日本語)</button>
+            <button class="language-button takeout-button" onclick="chooseTakeout()">外帶菜單</button>
         </div>
     </div>
-
     <!-- Swiper 滑動容器 -->
     <div class="swiper-container" id="menuContainer">
         <div class="swiper-wrapper" id="menuWrapper"></div>
@@ -90,7 +100,8 @@
         var menus = {
             cn: ["menu_cn_page1.jpg", "menu_cn_page2.jpg", "menu_cn_page3.jpg", "menu_cn_page4.jpg", "menu_cn_page5.jpg", "menu_cn_page6.jpg"],
             en: ["menu_en_page1.jpg", "menu_en_page2.jpg", "menu_en_page3.jpg"],
-            jp: ["menu_jp_page1.jpg", "menu_jp_page2.jpg", "menu_jp_page3.jpg"]
+            jp: ["menu_jp_page1.jpg", "menu_jp_page2.jpg", "menu_jp_page3.jpg"],
+            takeout: ["takeout_page1.jpg", "takeout_page2.jpg", "takeout_page3.jpg"]
         };
 
         function initSwiper() {
@@ -108,6 +119,12 @@
             document.getElementById("languageSelection").style.display = "none";
             document.getElementById("menuContainer").style.display = "block";
             switchMenu(lang);
+        }
+
+        function chooseTakeout() {
+            document.getElementById("languageSelection").style.display = "none";
+            document.getElementById("menuContainer").style.display = "block";
+            switchMenu('takeout');
         }
 
         function switchMenu(lang) {
