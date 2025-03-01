@@ -2,7 +2,7 @@
 <html lang="zh-TW">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
     <title>菜單</title>
     
     <!-- 引入 Swiper.js 的 CSS -->
@@ -10,9 +10,23 @@
 
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { background-color: #000; overflow: hidden; }
-        .swiper-container { width: 100vw; height: 100vh; }
-        .swiper-slide img { width: 100vw; height: 100vh; object-fit: cover; }
+        body { background-color: #000; }
+        .swiper-container { width: 100vw; height: 100vh; touch-action: manipulation; }
+        .swiper-slide { display: flex; align-items: center; justify-content: center; }
+        .swiper-slide img { max-width: 100%; max-height: 100%; object-fit: contain; }
+
+        /* 允許圖片手動縮放 */
+        .zoom-container {
+            width: 100vw;
+            height: 100vh;
+            overflow: auto; /* 允許滾動 */
+            touch-action: pinch-zoom; /* 確保雙指縮放可用 */
+        }
+
+        img {
+            transform-origin: center;
+            transition: transform 0.2s ease;
+        }
     </style>
 </head>
 <body>
@@ -20,12 +34,36 @@
     <!-- Swiper 滑動容器 -->
     <div class="swiper-container">
         <div class="swiper-wrapper">
-            <div class="swiper-slide"><img src="menu_page1.jpg" alt="菜單第1頁"></div>
-            <div class="swiper-slide"><img src="menu_page2.jpg" alt="菜單第2頁"></div>
-            <div class="swiper-slide"><img src="menu_page3.jpg" alt="菜單第3頁"></div>
-            <div class="swiper-slide"><img src="menu_page4.jpg" alt="菜單第4頁"></div>
-            <div class="swiper-slide"><img src="menu_page5.jpg" alt="菜單第5頁"></div>
-            <div class="swiper-slide"><img src="menu_page6.jpg" alt="菜單第6頁"></div>
+            <div class="swiper-slide">
+                <div class="zoom-container">
+                    <img src="menu_page1.jpg" alt="菜單第1頁">
+                </div>
+            </div>
+            <div class="swiper-slide">
+                <div class="zoom-container">
+                    <img src="menu_page2.jpg" alt="菜單第2頁">
+                </div>
+            </div>
+            <div class="swiper-slide">
+                <div class="zoom-container">
+                    <img src="menu_page3.jpg" alt="菜單第3頁">
+                </div>
+            </div>
+            <div class="swiper-slide">
+                <div class="zoom-container">
+                    <img src="menu_page4.jpg" alt="菜單第4頁">
+                </div>
+            </div>
+            <div class="swiper-slide">
+                <div class="zoom-container">
+                    <img src="menu_page5.jpg" alt="菜單第5頁">
+                </div>
+            </div>
+            <div class="swiper-slide">
+                <div class="zoom-container">
+                    <img src="menu_page6.jpg" alt="菜單第6頁">
+                </div>
+            </div>
         </div>
     </div>
 
@@ -34,9 +72,24 @@
 
     <script>
         var swiper = new Swiper('.swiper-container', {
-            loop: false, // 不循環，避免無限翻頁
+            loop: false, // 不循環
             touchEventsTarget: 'container', // 確保觸控有效
             pagination: false, // 不顯示分頁小點
+        });
+
+        // 允許雙指縮放
+        document.addEventListener('gesturestart', function (event) {
+            event.preventDefault();
+        });
+
+        let scale = 1;
+        document.addEventListener('wheel', function (event) {
+            if (event.ctrlKey) { // 檢測是否是 "Ctrl + 滾輪" 事件
+                event.preventDefault();
+                scale += event.deltaY * -0.01;
+                scale = Math.min(Math.max(.5, scale), 3); // 限制縮放範圍
+                document.querySelector('.swiper-slide-active img').style.transform = `scale(${scale})`;
+            }
         });
     </script>
 
