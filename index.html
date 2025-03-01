@@ -9,68 +9,37 @@
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
 
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { background-color: #000; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; overflow: hidden; font-family: Arial, sans-serif; }
-        
-        /* 收納式菜單按鈕 */
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, sans-serif; }
+        body { background-color: #000; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; overflow: hidden; }
+
+        /* 底部固定菜單按鈕 */
         .menu-container {
             position: fixed;
-            top: 15px;
+            bottom: 15px;
             left: 50%;
             transform: translateX(-50%);
-            z-index: 1000;
+            display: flex;
+            gap: 10px;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 8px 15px;
+            border-radius: 25px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
         }
 
-        .menu-toggle {
-            padding: 12px 20px;
-            font-size: 16px;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            background: linear-gradient(135deg, #007BFF, #0056b3);
-            color: white;
-            font-weight: bold;
-            transition: all 0.3s ease-in-out;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-        .menu-toggle:hover {
-            background: linear-gradient(135deg, #0056b3, #003d80);
-            transform: scale(1.05);
-        }
-
-        .menu-buttons {
-            display: none;
-            flex-direction: column;
-            gap: 8px;
-            background: rgba(255, 255, 255, 0.95);
-            padding: 12px;
-            border-radius: 10px;
-            position: absolute;
-            top: 50px;
-            left: 50%;
-            transform: translateX(-50%);
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
-            text-align: center;
-            width: 160px;
-        }
-        
         .menu-button {
-            padding: 12px;
-            font-size: 15px;
+            padding: 12px 18px;
+            font-size: 14px;
             border: none;
-            border-radius: 6px;
+            border-radius: 20px;
             cursor: pointer;
             background: linear-gradient(135deg, #007BFF, #0056b3);
             color: white;
             font-weight: bold;
-            width: 100%;
-            text-align: center;
             transition: all 0.3s ease-in-out;
-            box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
         }
         .menu-button:hover {
             background: linear-gradient(135deg, #0056b3, #003d80);
-            transform: scale(1.05);
+            transform: scale(1.1);
         }
 
         .swiper-container { width: 100vw; height: 100vh; }
@@ -88,14 +57,11 @@
 </head>
 <body>
 
-    <!-- 可收納的語言選擇按鈕 -->
+    <!-- 底部固定的語言選擇按鈕 -->
     <div class="menu-container">
-        <button class="menu-toggle" onclick="toggleMenu()">Menu Language</button>
-        <div class="menu-buttons" id="menuButtons">
-            <button class="menu-button" onclick="switchMenu('cn')">菜單<br>(中文)</button>
-            <button class="menu-button" onclick="switchMenu('en')">Menu<br>(English)</button>
-            <button class="menu-button" onclick="switchMenu('jp')">メニュー<br>(日本語)</button>
-        </div>
+        <button class="menu-button" onclick="switchMenu('cn')">菜單 (中文)</button>
+        <button class="menu-button" onclick="switchMenu('en')">Menu (English)</button>
+        <button class="menu-button" onclick="switchMenu('jp')">メニュー (日本語)</button>
     </div>
 
     <!-- Swiper 滑動容器 -->
@@ -138,12 +104,6 @@
             });
 
             swiper.update();
-            toggleMenu();
-        }
-
-        function toggleMenu() {
-            var menu = document.getElementById("menuButtons");
-            menu.style.display = (menu.style.display === "flex") ? "none" : "flex";
         }
 
         function loadDefaultMenu() {
