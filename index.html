@@ -10,62 +10,67 @@
 
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { background-color: #000; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; overflow: hidden; }
+        body { background-color: #000; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; overflow: hidden; font-family: Arial, sans-serif; }
         
         /* 收納式菜單按鈕 */
         .menu-container {
             position: fixed;
-            top: 10px;
+            top: 15px;
             left: 50%;
             transform: translateX(-50%);
             z-index: 1000;
         }
 
         .menu-toggle {
-            padding: 10px 18px;
+            padding: 12px 20px;
             font-size: 16px;
             border: none;
-            border-radius: 6px;
+            border-radius: 8px;
             cursor: pointer;
-            background-color: #007BFF;
+            background: linear-gradient(135deg, #007BFF, #0056b3);
             color: white;
             font-weight: bold;
-            transition: background 0.3s;
+            transition: all 0.3s ease-in-out;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
         .menu-toggle:hover {
-            background-color: #0056b3;
+            background: linear-gradient(135deg, #0056b3, #003d80);
+            transform: scale(1.05);
         }
 
         .menu-buttons {
             display: none;
             flex-direction: column;
-            gap: 5px;
+            gap: 8px;
             background: rgba(255, 255, 255, 0.95);
-            padding: 10px;
+            padding: 12px;
             border-radius: 10px;
             position: absolute;
-            top: 45px;
+            top: 50px;
             left: 50%;
             transform: translateX(-50%);
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
             text-align: center;
+            width: 160px;
         }
         
         .menu-button {
-            padding: 10px;
-            font-size: 14px;
+            padding: 12px;
+            font-size: 15px;
             border: none;
             border-radius: 6px;
             cursor: pointer;
-            background-color: #007BFF;
+            background: linear-gradient(135deg, #007BFF, #0056b3);
             color: white;
             font-weight: bold;
             width: 100%;
             text-align: center;
-            transition: background 0.3s;
+            transition: all 0.3s ease-in-out;
+            box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
         }
         .menu-button:hover {
-            background-color: #0056b3;
+            background: linear-gradient(135deg, #0056b3, #003d80);
+            transform: scale(1.05);
         }
 
         .swiper-container { width: 100vw; height: 100vh; }
@@ -85,7 +90,7 @@
 
     <!-- 可收納的語言選擇按鈕 -->
     <div class="menu-container">
-        <button class="menu-toggle" onclick="toggleMenu()">菜單語言 / Menu Language</button>
+        <button class="menu-toggle" onclick="toggleMenu()">Menu Language</button>
         <div class="menu-buttons" id="menuButtons">
             <button class="menu-button" onclick="switchMenu('cn')">菜單<br>(中文)</button>
             <button class="menu-button" onclick="switchMenu('en')">Menu<br>(English)</button>
@@ -96,7 +101,6 @@
     <!-- Swiper 滑動容器 -->
     <div class="swiper-container">
         <div class="swiper-wrapper" id="menuWrapper">
-            <!-- 頁面加載時自動載入完整中文菜單 -->
         </div>
     </div>
 
@@ -124,7 +128,7 @@
 
         function switchMenu(lang) {
             let menuWrapper = document.getElementById("menuWrapper");
-            menuWrapper.innerHTML = ""; // 清空現有內容
+            menuWrapper.innerHTML = "";
 
             menus[lang].forEach(src => {
                 let slide = document.createElement("div");
@@ -133,8 +137,8 @@
                 menuWrapper.appendChild(slide);
             });
 
-            swiper.update(); // 更新 Swiper
-            toggleMenu(); // 切換完語言後自動收起菜單
+            swiper.update();
+            toggleMenu();
         }
 
         function toggleMenu() {
@@ -143,12 +147,12 @@
         }
 
         function loadDefaultMenu() {
-            switchMenu('cn'); // 頁面載入時顯示完整的中文菜單
+            switchMenu('cn');
         }
 
         window.onload = function() {
             initSwiper();
-            loadDefaultMenu(); // 頁面加載時載入完整菜單
+            loadDefaultMenu();
         };
     </script>
 
