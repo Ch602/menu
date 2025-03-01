@@ -13,7 +13,7 @@
         body { background-color: #000; display: flex; align-items: center; justify-content: center; height: 100vh; }
         .swiper-container { width: 100vw; height: 100vh; }
 
-        /* 讓圖片可以自由縮放並拖動 */
+        /* 讓圖片可以縮放，並且縮放更平滑 */
         .swiper-slide { display: flex; align-items: center; justify-content: center; }
         .swiper-zoom-container img {
             max-width: none;
@@ -22,6 +22,7 @@
             height: 100%;
             object-fit: contain; /* 確保圖片完整顯示 */
             user-select: none; /* 避免選取 */
+            transition: transform 0.2s ease; /* 讓縮放更流暢 */
         }
     </style>
 </head>
@@ -71,7 +72,11 @@
             loop: false, // 不循環
             touchEventsTarget: 'container', // 確保觸控有效
             pagination: false, // 不顯示分頁小點
-            zoom: { maxRatio: 3, minRatio: 1 }, // 啟用縮放，最多 3 倍
+            zoom: {
+                maxRatio: 2, // 最大放大倍數降到 2 倍
+                minRatio: 1, // 最小縮放倍數
+                toggle: false // 禁止點擊後自動放大，避免太敏感
+            },
             allowTouchMove: true // 允許滑動
         });
     </script>
