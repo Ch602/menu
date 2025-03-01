@@ -11,21 +11,24 @@
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { background-color: #000; }
-        .swiper-container { width: 100vw; height: 100vh; touch-action: manipulation; }
+        .swiper-container { width: 100vw; height: 100vh; }
         .swiper-slide { display: flex; align-items: center; justify-content: center; }
-        .swiper-slide img { max-width: 100%; max-height: 100%; object-fit: contain; }
 
-        /* 允許圖片手動縮放 */
-        .zoom-container {
+        /* 允許圖片縮放 */
+        .swiper-zoom-container {
             width: 100vw;
             height: 100vh;
-            overflow: auto; /* 允許滾動 */
-            touch-action: pinch-zoom; /* 確保雙指縮放可用 */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            touch-action: none; /* 確保縮放不被阻擋 */
         }
 
-        img {
-            transform-origin: center;
-            transition: transform 0.2s ease;
+        .swiper-zoom-container img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
         }
     </style>
 </head>
@@ -35,32 +38,32 @@
     <div class="swiper-container">
         <div class="swiper-wrapper">
             <div class="swiper-slide">
-                <div class="zoom-container">
+                <div class="swiper-zoom-container">
                     <img src="menu_page1.jpg" alt="菜單第1頁">
                 </div>
             </div>
             <div class="swiper-slide">
-                <div class="zoom-container">
+                <div class="swiper-zoom-container">
                     <img src="menu_page2.jpg" alt="菜單第2頁">
                 </div>
             </div>
             <div class="swiper-slide">
-                <div class="zoom-container">
+                <div class="swiper-zoom-container">
                     <img src="menu_page3.jpg" alt="菜單第3頁">
                 </div>
             </div>
             <div class="swiper-slide">
-                <div class="zoom-container">
+                <div class="swiper-zoom-container">
                     <img src="menu_page4.jpg" alt="菜單第4頁">
                 </div>
             </div>
             <div class="swiper-slide">
-                <div class="zoom-container">
+                <div class="swiper-zoom-container">
                     <img src="menu_page5.jpg" alt="菜單第5頁">
                 </div>
             </div>
             <div class="swiper-slide">
-                <div class="zoom-container">
+                <div class="swiper-zoom-container">
                     <img src="menu_page6.jpg" alt="菜單第6頁">
                 </div>
             </div>
@@ -75,21 +78,7 @@
             loop: false, // 不循環
             touchEventsTarget: 'container', // 確保觸控有效
             pagination: false, // 不顯示分頁小點
-        });
-
-        // 允許雙指縮放
-        document.addEventListener('gesturestart', function (event) {
-            event.preventDefault();
-        });
-
-        let scale = 1;
-        document.addEventListener('wheel', function (event) {
-            if (event.ctrlKey) { // 檢測是否是 "Ctrl + 滾輪" 事件
-                event.preventDefault();
-                scale += event.deltaY * -0.01;
-                scale = Math.min(Math.max(.5, scale), 3); // 限制縮放範圍
-                document.querySelector('.swiper-slide-active img').style.transform = `scale(${scale})`;
-            }
+            zoom: { maxRatio: 3, minRatio: 1 } // 啟用縮放，最多 3 倍
         });
     </script>
 
