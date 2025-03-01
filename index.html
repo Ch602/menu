@@ -10,7 +10,7 @@
 
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { background-color: #000; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; }
+        body { background-color: #000; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; overflow: hidden; }
         
         /* 收納式菜單按鈕 */
         .menu-container {
@@ -18,19 +18,19 @@
             top: 10px;
             left: 50%;
             transform: translateX(-50%);
-            z-index: 10;
+            z-index: 1000;
         }
 
         .menu-toggle {
-            padding: 8px 16px;
+            padding: 10px 18px;
             font-size: 16px;
             border: none;
-            border-radius: 5px;
+            border-radius: 6px;
             cursor: pointer;
             background-color: #007BFF;
             color: white;
             font-weight: bold;
-            transition: 0.3s;
+            transition: background 0.3s;
         }
         .menu-toggle:hover {
             background-color: #0056b3;
@@ -40,29 +40,29 @@
             display: none;
             flex-direction: column;
             gap: 5px;
-            background: rgba(255, 255, 255, 0.9);
+            background: rgba(255, 255, 255, 0.95);
             padding: 10px;
             border-radius: 10px;
             position: absolute;
-            top: 40px;
+            top: 45px;
             left: 50%;
             transform: translateX(-50%);
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
             text-align: center;
         }
         
         .menu-button {
-            padding: 8px 12px;
+            padding: 10px;
             font-size: 14px;
             border: none;
-            border-radius: 5px;
+            border-radius: 6px;
             cursor: pointer;
             background-color: #007BFF;
             color: white;
             font-weight: bold;
             width: 100%;
             text-align: center;
-            white-space: nowrap;
+            transition: background 0.3s;
         }
         .menu-button:hover {
             background-color: #0056b3;
@@ -85,7 +85,7 @@
 
     <!-- 可收納的語言選擇按鈕 -->
     <div class="menu-container">
-        <button class="menu-toggle" onclick="toggleMenu()">菜單語言 / Menu Language</button>
+        <button class="menu-toggle" onclick="toggleMenu()">Menu Language</button>
         <div class="menu-buttons" id="menuButtons">
             <button class="menu-button" onclick="switchMenu('cn')">菜單<br>(中文)</button>
             <button class="menu-button" onclick="switchMenu('en')">Menu<br>(English)</button>
@@ -96,7 +96,6 @@
     <!-- Swiper 滑動容器 -->
     <div class="swiper-container">
         <div class="swiper-wrapper" id="menuWrapper">
-            <!-- 預設顯示中文菜單 -->
             <div class="swiper-slide"><div class="swiper-zoom-container"><img src="menu_cn_page1.jpg" alt="菜單第1頁"></div></div>
             <div class="swiper-slide"><div class="swiper-zoom-container"><img src="menu_cn_page2.jpg" alt="菜單第2頁"></div></div>
             <div class="swiper-slide"><div class="swiper-zoom-container"><img src="menu_cn_page3.jpg" alt="菜單第3頁"></div></div>
@@ -120,7 +119,8 @@
                 touchEventsTarget: 'container',
                 pagination: false,
                 zoom: { maxRatio: 2, minRatio: 1, toggle: false },
-                allowTouchMove: true
+                allowTouchMove: true,
+                speed: 300 // 提升流暢度
             });
         }
 
