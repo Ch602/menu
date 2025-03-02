@@ -62,7 +62,7 @@
 
         /* 外帶按鈕 */
         .takeout-button {
-            margin-top: 20px;
+            margin-top: 10px; /* 调整顶部间距 */
             background: linear-gradient(135deg, #FFA07A, #FF7F50); /* 温和珊瑚色 */
             transition: background 0.3s ease-in-out, transform 0.3s ease-in-out;
         }
@@ -70,10 +70,9 @@
             background: linear-gradient(135deg, #FF7F50, #FF6347); /* 略深一点的珊瑚色 */
             transform: scale(1.05);
         }
-
         /* 內用按鈕 */
         .dine-in-button {
-            margin-top: 20px;
+            margin-top: 10px; /* 调整顶部间距 */
             background: linear-gradient(135deg, #4CAF50, #388E3C); /* 柔和绿色 */
             transition: background 0.3s ease-in-out, transform 0.3s ease-in-out;
         }
@@ -81,7 +80,12 @@
             background: linear-gradient(135deg, #388E3C, #2C6B2F); /* 更深绿色 */
             transform: scale(1.05);
         }
-
+            .language-buttons {
+                display: flex;
+                flex-direction: column;
+                gap: 0; /* 移除按钮之间的额外间距 */
+            }
+        </style>
         .swiper-container { 
             width: 100vw; 
             height: 100vh; 
