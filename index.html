@@ -120,6 +120,28 @@
             background-color: transparent; /* 确保背景透明 */
         }
 
+        /* 返回到語言選擇 */
+        .back-icon-left {
+            position: fixed;
+            top: 20px;
+            left: 20px; /* 左上角 */
+            cursor: pointer;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 1001;
+        }
+
+        .back-icon-left.show {
+            opacity: 1;
+        }
+
+        /* 使圖片自適應大小 */
+        .back-icon-left img {
+            width: 30px;
+            height: 30px;
+            background-color: transparent; /* 确保背景透明 */
+        }
+
         /* 提示框 */
         .modal {
             position: fixed;
@@ -174,6 +196,14 @@
             <button class="language-button" onclick="chooseLanguage('cn')">菜單 (中文)</button>
             <button class="language-button" onclick="chooseLanguage('en')">Menu (English)</button>
             <button class="language-button" onclick="chooseLanguage('jp')">メニュー (日本語)</button>
+        </div>
+        <!-- 左上角的返回按鈕 -->
+        <div class="back-icon-left show" id="backIconLeft" onclick="goBackLanguageSelection()">
+            <!-- 使用SVG图标作为返回按钮 -->
+            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M19 12H5"></path>
+                <path d="M12 5l-7 7 7 7"></path>
+            </svg>
         </div>
     </div>
 
@@ -240,7 +270,7 @@
             document.getElementById("backIcon").classList.add("show");
             setTimeout(function() {
                 showModal(lang);
-            }, 1000);
+            }, 0);
         }
 
         function switchMenu(lang) {
@@ -270,6 +300,12 @@
             document.getElementById("menuContainer").style.display = "none";
             document.getElementById("menuLanguageSelection").style.display = "flex";
             document.getElementById("languageSelection").style.display = "none"; // 隐藏主语言选择页面
+            document.getElementById("backIcon").classList.remove("show");
+        }
+
+        function goBackLanguageSelection() {
+            document.getElementById("menuLanguageSelection").style.display = "none";
+            document.getElementById("languageSelection").style.display = "flex";
             document.getElementById("backIcon").classList.remove("show");
         }
 
