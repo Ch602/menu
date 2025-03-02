@@ -59,18 +59,22 @@
         .takeout-button {
             margin-top: 20px;
             background: linear-gradient(135deg, #FFD700, #FFA500);
+            transition: background 0.3s ease-in-out, transform 0.3s ease-in-out;
         }
         .takeout-button:hover {
             background: linear-gradient(135deg, #FFA500, #FF8C00);
+            transform: scale(1.05);
         }
 
         /* 內用按鈕 */
         .dine-in-button {
             margin-top: 20px;
             background: linear-gradient(135deg, #32CD32, #228B22);
+            transition: background 0.3s ease-in-out, transform 0.3s ease-in-out;
         }
         .dine-in-button:hover {
             background: linear-gradient(135deg, #228B22, #006400);
+            transform: scale(1.05);
         }
 
         .swiper-container { 
@@ -98,7 +102,7 @@
         .back-icon {
             position: fixed;
             top: 20px;
-            left: 20px; /* 将返回图标移到左上角 */
+            right: 20px; /* 右上角 */
             cursor: pointer;
             opacity: 0;
             transition: opacity 0.3s ease;
@@ -111,9 +115,43 @@
 
         /* 使圖片自適應大小 */
         .back-icon img {
-            width: 40px;
-            height: 40px;
+            width: 30px;
+            height: 30px;
             background-color: transparent; /* 确保背景透明 */
+        }
+
+        /* 提示框 */
+        .modal {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            display: none;
+            z-index: 1002;
+            width: 80%;
+            max-width: 400px;
+        }
+
+        .modal h3 {
+            margin-bottom: 20px;
+        }
+
+        .modal button {
+            padding: 10px 20px;
+            background-color: #FD3A69;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .modal button:hover {
+            background-color: #FF1E56;
         }
 
     </style>
@@ -147,10 +185,16 @@
     <!-- 返回圖示 -->
     <div class="back-icon" id="backIcon" onclick="goBack()">
         <!-- 使用SVG图标作为返回按钮 -->
-        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M19 12H5"></path>
             <path d="M12 5l-7 7 7 7"></path>
         </svg>
+    </div>
+
+    <!-- 提示框 -->
+    <div class="modal" id="modal">
+        <h3 id="modalText">如果您選好餐點或有任何問題，請尋求服務人員協助。</h3>
+        <button onclick="closeModal()">確認</button>
     </div>
 
     <!-- 引入 Swiper.js 的 JS -->
@@ -194,6 +238,9 @@
             document.getElementById("menuContainer").style.display = "flex";
             switchMenu(lang);
             document.getElementById("backIcon").classList.add("show");
+            setTimeout(function() {
+                showModal(lang);
+            }, 1000);
         }
 
         function switchMenu(lang) {
@@ -224,6 +271,26 @@
             document.getElementById("menuLanguageSelection").style.display = "flex";
             document.getElementById("languageSelection").style.display = "none"; // 隐藏主语言选择页面
             document.getElementById("backIcon").classList.remove("show");
+        }
+
+        function showModal(lang) {
+            let modalText = document.getElementById("modalText");
+            if (lang === "cn") {
+                modalText.innerHTML = "如果您選好餐點或有任何問題，請尋求服務人員協助。<br> If you have selected your dish or have any questions, please ask the staff for assistance.";
+            } else if (lang === "en") {
+                modalText.innerHTML = "If you have selected your dish or have any questions, please ask the staff for assistance.";
+            } else if (lang === "jp") {
+                modalText.innerHTML = "料理を選んだり、質問があればスタッフにお問い合わせください。";
+            }
+            document.getElementById("modal").style.display = "block";
+            // 8秒后自动关闭
+            setTimeout(function() {
+                closeModal();
+            }, 8000);
+        }
+
+        function closeModal() {
+            document.getElementById("modal").style.display = "none";
         }
 
         window.onload = function() {
