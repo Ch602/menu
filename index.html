@@ -113,7 +113,41 @@
         .back-icon img {
             width: 40px;
             height: 40px;
-            background-color: transparent; /* 确保背景透明 */
+            background-color: transparent;
+        }
+
+        /* 提示框 */
+        .modal {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            display: none;
+            z-index: 1002;
+            width: 80%;
+            max-width: 400px;
+        }
+
+        .modal h3 {
+            margin-bottom: 20px;
+        }
+
+        .modal button {
+            padding: 10px 20px;
+            background-color: #FD3A69;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .modal button:hover {
+            background-color: #FF1E56;
         }
 
     </style>
@@ -146,8 +180,13 @@
 
     <!-- 返回圖示 -->
     <div class="back-icon" id="backIcon" onclick="goBack()">
-        <!-- 使用相對路徑引用圖示 -->
         <img src="return.png" alt="返回">
+    </div>
+
+    <!-- 提示框 -->
+    <div class="modal" id="modal">
+        <h3 id="modalText">如果您選好餐點或有任何問題，請尋求服務人員協助。</h3>
+        <button onclick="closeModal()">確認</button>
     </div>
 
     <!-- 引入 Swiper.js 的 JS -->
@@ -191,6 +230,10 @@
             document.getElementById("menuContainer").style.display = "flex";
             switchMenu(lang);
             document.getElementById("backIcon").classList.add("show");
+            // 延迟显示提示框
+            setTimeout(function() {
+                showModal(lang);
+            }, 1000);
         }
 
         function switchMenu(lang) {
@@ -214,6 +257,26 @@
             } else {
                 img.style.transform = "scale(2)";
             }
+        }
+
+        function showModal(lang) {
+            let modalText = document.getElementById("modalText");
+            if (lang === "cn") {
+                modalText.innerHTML = "如果您選好餐點或有任何問題，請尋求服務人員協助。<br> If you have selected your dish or have any questions, please ask the staff for assistance.";
+            } else if (lang === "en") {
+                modalText.innerHTML = "If you have selected your dish or have any questions, please ask the staff for assistance.";
+            } else if (lang === "jp") {
+                modalText.innerHTML = "料理を選んだり、質問があればスタッフにお問い合わせください。";
+            }
+            document.getElementById("modal").style.display = "block";
+            // 8秒后自动关闭
+            setTimeout(function() {
+                closeModal();
+            }, 8000);
+        }
+
+        function closeModal() {
+            document.getElementById("modal").style.display = "none";
         }
 
         function goBack() {
