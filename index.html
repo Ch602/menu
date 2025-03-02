@@ -98,7 +98,7 @@
         .back-icon {
             position: fixed;
             top: 20px;
-            right: 20px;
+            left: 20px; /* 将返回图标移到左上角 */
             cursor: pointer;
             opacity: 0;
             transition: opacity 0.3s ease;
@@ -217,7 +217,6 @@
         }
 
         function goBack() {
-            // 确保返回到“菜單語言選擇”頁面
             document.getElementById("menuContainer").style.display = "none";
             document.getElementById("menuLanguageSelection").style.display = "flex";
             document.getElementById("languageSelection").style.display = "none"; // 隐藏主语言选择页面
