@@ -93,6 +93,28 @@
             user-select: none;
             transition: transform 0.2s ease;
         }
+
+        /* 返回文字樣式 */
+        .back-text {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            color: white;
+            font-size: 18px;
+            cursor: pointer;
+            font-weight: bold;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 1001;
+        }
+
+        .back-text:hover {
+            color: #FD3A69;
+        }
+
+        .back-text.show {
+            opacity: 1;
+        }
     </style>
 </head>
 <body>
@@ -121,6 +143,9 @@
         <div class="swiper-wrapper" id="menuWrapper"></div>
     </div>
 
+    <!-- 返回文字 -->
+    <div class="back-text" id="backText" onclick="goBack()">返回</div>
+
     <!-- 引入 Swiper.js 的 JS -->
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 
@@ -147,18 +172,21 @@
         function chooseDineIn() {
             document.getElementById("languageSelection").style.display = "none";
             document.getElementById("menuLanguageSelection").style.display = "flex";
+            document.getElementById("backText").classList.add("show");
         }
 
         function chooseTakeout() {
             document.getElementById("languageSelection").style.display = "none";
             document.getElementById("menuContainer").style.display = "flex";
             switchMenu('takeout');
+            document.getElementById("backText").classList.add("show");
         }
 
         function chooseLanguage(lang) {
             document.getElementById("menuLanguageSelection").style.display = "none";
             document.getElementById("menuContainer").style.display = "flex";
             switchMenu(lang);
+            document.getElementById("backText").classList.add("show");
         }
 
         function switchMenu(lang) {
@@ -182,6 +210,13 @@
             } else {
                 img.style.transform = "scale(2)";
             }
+        }
+
+        function goBack() {
+            document.getElementById("menuContainer").style.display = "none";
+            document.getElementById("menuLanguageSelection").style.display = "none";
+            document.getElementById("languageSelection").style.display = "flex";
+            document.getElementById("backText").classList.remove("show");
         }
 
         window.onload = function() {
