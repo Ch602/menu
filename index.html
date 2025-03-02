@@ -71,7 +71,8 @@
                 },
                 zoom: { maxRatio: 2, minRatio: 1, toggle: false }, // 图片缩放
                 allowTouchMove: true, // 启用触摸滑动
-                speed: 300  // 滑动速度
+                speed: 300,  // 滑动速度
+                spaceBetween: 0, // 设置图片之间的间距为0
             });
         }
 
@@ -96,7 +97,7 @@
             // 延迟显示提示框
             setTimeout(function() {
                 showModal(lang);
-            }, 1000);
+            }, 200);
         }
 
         function switchMenu(lang) {
