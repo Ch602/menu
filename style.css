@@ -87,7 +87,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 100vw; /* 每次显示一张完整的图片 */
+    width: 100%; /* 每次显示一张完整的图片 */
 }
 
 .swiper-zoom-container img {
