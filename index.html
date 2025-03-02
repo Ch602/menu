@@ -243,7 +243,7 @@
             menus[lang].forEach(src => {
                 let slide = document.createElement("div");
                 slide.className = "swiper-slide";
-                slide.innerHTML = <div class="swiper-zoom-container" ondblclick="toggleZoom(this)"><img src="${src}" alt="菜單"></div>;
+                slide.innerHTML = `<div class="swiper-zoom-container" ondblclick="toggleZoom(this)"><img src="${src}" alt="菜單"></div>`;
                 menuWrapper.appendChild(slide);
             });
 
