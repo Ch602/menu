@@ -5,152 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
     <title>選擇菜單語言</title>
     
-    <!-- 引入 Swiper.js 的 CSS -->
-    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+    <!-- 引入外部的 CSS 文件 -->
+    <link rel="stylesheet" href="style.css">
 
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, sans-serif; }
-        body { background-color: #000; display: flex; align-items: center; justify-content: center; height: 100vh; overflow: hidden; }
-
-        /* 語言選擇畫面 */
-        .language-selection {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            background: rgba(0, 0, 0, 0.85);
-            width: 100vw;
-            height: 100vh;
-            position: fixed;
-            z-index: 1000;
-            text-align: center;
-        }
-        .language-title {
-            color: white;
-            font-size: 26px;
-            margin-bottom: 25px;
-            font-weight: bold;
-        }
-        .language-buttons {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-        .language-button {
-            padding: 14px 20px;
-            font-size: 18px;
-            border: none;
-            border-radius: 10px;
-            cursor: pointer;
-            background: linear-gradient(135deg, #FF7E5F, #FD3A69);
-            color: white;
-            font-weight: bold;
-            width: 220px;
-            text-align: center;
-            transition: all 0.3s ease-in-out;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        }
-        .language-button:hover {
-            background: linear-gradient(135deg, #FD3A69, #FF1E56);
-            transform: scale(1.05);
-        }
-
-        /* 外帶按鈕 */
-        .takeout-button {
-            margin-top: 20px;
-            background: linear-gradient(135deg, #FFD700, #FFA500);
-        }
-        .takeout-button:hover {
-            background: linear-gradient(135deg, #FFA500, #FF8C00);
-        }
-
-        /* 內用按鈕 */
-        .dine-in-button {
-            margin-top: 20px;
-            background: linear-gradient(135deg, #32CD32, #228B22);
-        }
-        .dine-in-button:hover {
-            background: linear-gradient(135deg, #228B22, #006400);
-        }
-
-        .swiper-container { 
-            width: 100vw; 
-            height: 100vh; 
-            display: none; 
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .swiper-slide { 
-            display: flex; 
-            align-items: center; 
-            justify-content: center;
-        }
-        .swiper-zoom-container img {
-            max-width: 100%;
-            max-height: 90vh;
-            object-fit: contain;
-            user-select: none;
-            transition: transform 0.2s ease;
-        }
-
-        /* 返回圖示 */
-        .back-icon {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            cursor: pointer;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            z-index: 1001;
-        }
-
-        .back-icon.show {
-            opacity: 1;
-        }
-
-        /* 使圖片自適應大小 */
-        .back-icon img {
-            width: 40px;
-            height: 40px;
-            background-color: transparent;
-        }
-
-        /* 提示框 */
-        .modal {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background-color: white;
-            padding: 20px;
-            border-radius: 10px;
-            text-align: center;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            display: none;
-            z-index: 1002;
-            width: 80%;
-            max-width: 400px;
-        }
-
-        .modal h3 {
-            margin-bottom: 20px;
-        }
-
-        .modal button {
-            padding: 10px 20px;
-            background-color: #FD3A69;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        .modal button:hover {
-            background-color: #FF1E56;
-        }
-
-    </style>
 </head>
 <body>
 
@@ -178,7 +35,7 @@
         <div class="swiper-wrapper" id="menuWrapper"></div>
     </div>
 
-    <!-- 返回圖示 -->
+    <!-- 返回图标 -->
     <div class="back-icon" id="backIcon" onclick="goBack()">
         <img src="return.png" alt="返回">
     </div>
@@ -280,7 +137,6 @@
         }
 
         function goBack() {
-            // 确保返回到“菜單語言選擇”頁面
             document.getElementById("menuContainer").style.display = "none";
             document.getElementById("menuLanguageSelection").style.display = "flex";
             document.getElementById("languageSelection").style.display = "none"; // 隐藏主语言选择页面
