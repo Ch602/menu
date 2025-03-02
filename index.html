@@ -5,45 +5,44 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
     <title>選擇菜單語言</title>
     
-    <!-- 引入外部的 CSS 文件 -->
-    <link rel="stylesheet" href="style.css">
-
+    <!-- 引入 Swiper.js 的 CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
 </head>
-<body>
+<body style="background-color: #000; display: flex; align-items: center; justify-content: center; height: 100vh; overflow: hidden;">
 
     <!-- 語言選擇畫面 -->
-    <div class="language-selection" id="languageSelection">
-        <div class="language-title">請選擇您的菜單語言</div>
-        <div class="language-buttons">
-            <button class="language-button dine-in-button" onclick="chooseDineIn()">內用菜單</button>
-            <button class="language-button takeout-button" onclick="chooseTakeout()">外帶菜單</button>
+    <div class="language-selection" id="languageSelection" style="display: flex; flex-direction: column; align-items: center; justify-content: center; background: rgba(0, 0, 0, 0.85); width: 100vw; height: 100vh; position: fixed; z-index: 1000; text-align: center;">
+        <div class="language-title" style="color: white; font-size: 26px; margin-bottom: 25px; font-weight: bold;">請選擇您的菜單語言</div>
+        <div class="language-buttons" style="display: flex; flex-direction: column; gap: 15px;">
+            <button class="language-button" style="padding: 14px 20px; font-size: 18px; border: none; border-radius: 10px; cursor: pointer; background: linear-gradient(135deg, #FF7E5F, #FD3A69); color: white; font-weight: bold; width: 220px; text-align: center;" onclick="chooseDineIn()">內用菜單</button>
+            <button class="language-button" style="padding: 14px 20px; font-size: 18px; border: none; border-radius: 10px; cursor: pointer; background: linear-gradient(135deg, #FFD700, #FFA500); color: white; font-weight: bold; width: 220px; text-align: center;" onclick="chooseTakeout()">外帶菜單</button>
         </div>
     </div>
 
     <!-- 菜單語言選擇 -->
-    <div class="language-selection" id="menuLanguageSelection" style="display:none;">
-        <div class="language-title">請選擇語言</div>
-        <div class="language-buttons">
-            <button class="language-button" onclick="chooseLanguage('cn')">菜單 (中文)</button>
-            <button class="language-button" onclick="chooseLanguage('en')">Menu (English)</button>
-            <button class="language-button" onclick="chooseLanguage('jp')">メニュー (日本語)</button>
+    <div class="language-selection" id="menuLanguageSelection" style="display:none; flex-direction: column; align-items: center; justify-content: center; background: rgba(0, 0, 0, 0.85); width: 100vw; height: 100vh; position: fixed; z-index: 1000; text-align: center;">
+        <div class="language-title" style="color: white; font-size: 26px; margin-bottom: 25px; font-weight: bold;">請選擇語言</div>
+        <div class="language-buttons" style="display: flex; flex-direction: column; gap: 15px;">
+            <button class="language-button" style="padding: 14px 20px; font-size: 18px; border: none; border-radius: 10px; cursor: pointer; background: linear-gradient(135deg, #FF7E5F, #FD3A69); color: white; font-weight: bold; width: 220px; text-align: center;" onclick="chooseLanguage('cn')">菜單 (中文)</button>
+            <button class="language-button" style="padding: 14px 20px; font-size: 18px; border: none; border-radius: 10px; cursor: pointer; background: linear-gradient(135deg, #FF7E5F, #FD3A69); color: white; font-weight: bold; width: 220px; text-align: center;" onclick="chooseLanguage('en')">Menu (English)</button>
+            <button class="language-button" style="padding: 14px 20px; font-size: 18px; border: none; border-radius: 10px; cursor: pointer; background: linear-gradient(135deg, #FF7E5F, #FD3A69); color: white; font-weight: bold; width: 220px; text-align: center;" onclick="chooseLanguage('jp')">メニュー (日本語)</button>
         </div>
     </div>
 
     <!-- Swiper 滑動容器 -->
-    <div class="swiper-container" id="menuContainer">
+    <div class="swiper-container" id="menuContainer" style="width: 100vw; height: 100vh; display: none; display: flex; align-items: center; justify-content: center;">
         <div class="swiper-wrapper" id="menuWrapper"></div>
     </div>
 
-    <!-- 返回图标 -->
-    <div class="back-icon" id="backIcon" onclick="goBack()">
-        <img src="return.png" alt="返回">
+    <!-- 返回圖示 -->
+    <div class="back-icon" id="backIcon" onclick="goBack()" style="position: fixed; top: 20px; right: 20px; cursor: pointer; opacity: 0; transition: opacity 0.3s ease; z-index: 1001;">
+        <img src="return.png" alt="返回" style="width: 40px; height: 40px; background-color: transparent;">
     </div>
 
     <!-- 提示框 -->
-    <div class="modal" id="modal">
-        <h3 id="modalText">如果您選好餐點或有任何問題，請尋求服務人員協助。</h3>
-        <button onclick="closeModal()">確認</button>
+    <div class="modal" id="modal" style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: white; padding: 20px; border-radius: 10px; text-align: center; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); display: none; z-index: 1002; width: 80%; max-width: 400px;">
+        <h3 id="modalText" style="margin-bottom: 20px;">如果您選好餐點或有任何問題，請尋求服務人員協助。</h3>
+        <button onclick="closeModal()" style="padding: 10px 20px; background-color: #FD3A69; color: white; border: none; border-radius: 5px; cursor: pointer;">確認</button>
     </div>
 
     <!-- 引入 Swiper.js 的 JS -->
@@ -60,21 +59,12 @@
 
         function initSwiper() {
             swiper = new Swiper('.swiper-container', {
-                loop: true,  // 开启循环模式
-                pagination: {  // 分页功能
-                    el: '.swiper-pagination',
-                    clickable: true
-                },
-                navigation: {  // 左右箭头导航
-                    nextEl: '.swiper-button-next',
-                    prevEl: '.swiper-button-prev'
-                },
-                zoom: { maxRatio: 2, minRatio: 1, toggle: false }, // 图片缩放
-                allowTouchMove: true, // 启用触摸滑动
-                speed: 300,  // 滑动速度
-                spaceBetween: 0, // 设置图片之间的间距为0
-                slidesPerView: 1, // 每次显示一张图片
-                centeredSlides: true, // 使滑动居中
+                loop: false,
+                touchEventsTarget: 'container',
+                pagination: false,
+                zoom: { maxRatio: 2, minRatio: 1, toggle: false },
+                allowTouchMove: true,
+                speed: 300
             });
         }
 
