@@ -73,6 +73,30 @@ body {
     background-color: #FF1E56;
 }
 
+/* Swiper 滑動容器 */
+.swiper-container {
+    width: 100vw;
+    height: 100vh;
+    display: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.swiper-slide {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.swiper-zoom-container img {
+    max-width: 100%;
+    max-height: 90vh;
+    object-fit: contain;
+    user-select: none;
+    transition: transform 0.2s ease;
+}
+
 /* 語言選擇畫面 */
 .language-selection {
     display: flex;
@@ -118,28 +142,4 @@ body {
 .language-button:hover {
     background: linear-gradient(135deg, #FD3A69, #FF1E56);
     transform: scale(1.05);
-}
-
-/* Swiper 滑動容器 */
-.swiper-container {
-    width: 100vw;
-    height: 100vh;
-    display: none;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.swiper-slide {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.swiper-zoom-container img {
-    max-width: 100%;
-    max-height: 90vh;
-    object-fit: contain;
-    user-select: none;
-    transition: transform 0.2s ease;
 }
