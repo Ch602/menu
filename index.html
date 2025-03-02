@@ -63,7 +63,16 @@
         .takeout-button:hover {
             background: linear-gradient(135deg, #FFA500, #FF8C00);
         }
-        
+
+        /* 內用按鈕 */
+        .dine-in-button {
+            margin-top: 20px;
+            background: linear-gradient(135deg, #32CD32, #228B22);
+        }
+        .dine-in-button:hover {
+            background: linear-gradient(135deg, #228B22, #006400);
+        }
+
         .swiper-container { 
             width: 100vw; 
             height: 100vh; 
@@ -92,10 +101,18 @@
     <div class="language-selection" id="languageSelection">
         <div class="language-title">請選擇您的菜單語言</div>
         <div class="language-buttons">
+            <button class="language-button dine-in-button" onclick="chooseDineIn()">內用菜單</button>
+            <button class="language-button takeout-button" onclick="chooseTakeout()">外帶菜單</button>
+        </div>
+    </div>
+
+    <!-- 菜單語言選擇 -->
+    <div class="language-selection" id="menuLanguageSelection" style="display:none;">
+        <div class="language-title">請選擇語言</div>
+        <div class="language-buttons">
             <button class="language-button" onclick="chooseLanguage('cn')">菜單 (中文)</button>
             <button class="language-button" onclick="chooseLanguage('en')">Menu (English)</button>
             <button class="language-button" onclick="chooseLanguage('jp')">メニュー (日本語)</button>
-            <button class="language-button takeout-button" onclick="chooseTakeout()">外帶菜單</button>
         </div>
     </div>
 
@@ -127,16 +144,21 @@
             });
         }
 
-        function chooseLanguage(lang) {
+        function chooseDineIn() {
             document.getElementById("languageSelection").style.display = "none";
-            document.getElementById("menuContainer").style.display = "flex";
-            switchMenu(lang);
+            document.getElementById("menuLanguageSelection").style.display = "flex";
         }
 
         function chooseTakeout() {
             document.getElementById("languageSelection").style.display = "none";
             document.getElementById("menuContainer").style.display = "flex";
             switchMenu('takeout');
+        }
+
+        function chooseLanguage(lang) {
+            document.getElementById("menuLanguageSelection").style.display = "none";
+            document.getElementById("menuContainer").style.display = "flex";
+            switchMenu(lang);
         }
 
         function switchMenu(lang) {
