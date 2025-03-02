@@ -60,12 +60,18 @@
 
         function initSwiper() {
             swiper = new Swiper('.swiper-container', {
-                loop: false,
-                touchEventsTarget: 'container',
-                pagination: false,
-                zoom: { maxRatio: 2, minRatio: 1, toggle: false },
-                allowTouchMove: true,
-                speed: 300
+                loop: false,  // 循环模式
+                pagination: {  // 分页功能
+                    el: '.swiper-pagination',
+                    clickable: true
+                },
+                navigation: {  // 左右箭头导航
+                    nextEl: '.swiper-button-next',
+                    prevEl: '.swiper-button-prev'
+                },
+                zoom: { maxRatio: 2, minRatio: 1, toggle: false }, // 图片缩放
+                allowTouchMove: true, // 启用触摸滑动
+                speed: 300  // 滑动速度
             });
         }
 
