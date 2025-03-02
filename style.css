@@ -81,18 +81,20 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    background-color: transparent; /* 去除黑色背景 */
 }
 
 .swiper-slide {
     display: flex;
     align-items: center;
     justify-content: center;
+    width: 100vw; /* 每次显示一张完整的图片 */
 }
 
 .swiper-zoom-container img {
     width: 100%;
-    max-height: 90vh;
-    object-fit: contain;
+    height: auto;
+    object-fit: contain; /* 确保图片按比例显示 */
     user-select: none;
     transition: transform 0.2s ease;
 }
