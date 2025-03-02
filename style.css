@@ -1,0 +1,26 @@
+
+.back-icon {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 1001;
+}
+
+
+.back-icon.show {
+    opacity: 1;
+}
+
+
+.back-icon img {
+    width: 40px;
+    height: 40px;
+    background-color: transparent;  
+    border: none;  
+}
+
+.language-selection { ... }
+.swiper-container { ... }
