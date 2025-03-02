@@ -28,8 +28,13 @@
         .language-title {
             color: white;
             font-size: 26px;
-            margin-bottom: 25px;
+            margin-bottom: 10px; /* 控制文字之间的间距 */
             font-weight: bold;
+        }
+        .language-subtitle {
+            font-size: 18px;
+            display: block;
+            margin-top: 5px;
         }
         .language-buttons {
             display: flex;
@@ -182,7 +187,11 @@
 
     <!-- 語言選擇畫面 -->
     <div class="language-selection" id="languageSelection">
-        <div class="language-title">用餐方式<br>Dining Options</br>食事方法を選択</div>
+        <div class="language-title">
+            用餐方式
+            <span class="language-subtitle">Dining Options</span>
+            <span class="language-subtitle">食事方法を選択</span>
+        </div>
         <div class="language-buttons">
             <button class="language-button dine-in-button" onclick="chooseDineIn()">內用菜單</button>
             <button class="language-button takeout-button" onclick="chooseTakeout()">外帶菜單</button>
@@ -191,7 +200,11 @@
 
     <!-- 菜單語言選擇 -->
     <div class="language-selection" id="menuLanguageSelection" style="display:none;">
-        <div class="language-title">請選擇語言 <br>Select Language</br><br>言語を選択</br></div>
+        <div class="language-title">
+            請選擇語言
+            <span class="language-subtitle">Select Language</span>
+            <span class="language-subtitle">言語を選択</span>
+        </div>
         <div class="language-buttons">
             <button class="language-button" onclick="chooseLanguage('cn')">菜單 (中文)</button>
             <button class="language-button" onclick="chooseLanguage('en')">Menu (English)</button>
@@ -280,7 +293,7 @@
             menus[lang].forEach(src => {
                 let slide = document.createElement("div");
                 slide.className = "swiper-slide";
-                slide.innerHTML = <div class="swiper-zoom-container" ondblclick="toggleZoom(this)"><img src="${src}" alt="菜單"></div>;
+                slide.innerHTML = `<div class="swiper-zoom-container" ondblclick="toggleZoom(this)"><img src="${src}" alt="菜單"></div>`;
                 menuWrapper.appendChild(slide);
             });
 
