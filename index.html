@@ -145,6 +145,7 @@
 
     <!-- 返回圖示 -->
     <div class="back-icon" id="backIcon" onclick="goBack()">
+        <!-- 使用相對路徑引用圖示 -->
         <img src="return.png" alt="返回">
     </div>
 
@@ -215,16 +216,10 @@
         }
 
         function goBack() {
-            if (document.getElementById("menuContainer").style.display === "flex") {
-                // 如果在菜單頁面，返回語言選擇頁面
-                document.getElementById("menuContainer").style.display = "none";
-                document.getElementById("menuLanguageSelection").style.display = "none";
-                document.getElementById("languageSelection").style.display = "flex";
-            } else if (document.getElementById("menuLanguageSelection").style.display === "flex") {
-                // 如果在菜單語言選擇頁面，返回主語言選擇頁面
-                document.getElementById("menuLanguageSelection").style.display = "none";
-                document.getElementById("languageSelection").style.display = "flex";
-            }
+            // 确保返回到“菜單語言選擇”頁面
+            document.getElementById("menuContainer").style.display = "none";
+            document.getElementById("menuLanguageSelection").style.display = "flex";
+            document.getElementById("languageSelection").style.display = "none"; // 隐藏主语言选择页面
             document.getElementById("backIcon").classList.remove("show");
         }
 
