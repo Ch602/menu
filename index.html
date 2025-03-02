@@ -28,13 +28,12 @@
         .language-title {
             color: white;
             font-size: 26px;
-            margin-bottom: 10px; /* 控制文字之间的间距 */
+            margin-bottom: 5px; /* 控制顶部和下面文字的间距 */
             font-weight: bold;
         }
         .language-subtitle {
             font-size: 18px;
-            display: block;
-            margin-top: 5px;
+            margin-top: 0; /* 没有额外的顶部间距 */
         }
         .language-buttons {
             display: flex;
@@ -62,30 +61,26 @@
 
         /* 外帶按鈕 */
         .takeout-button {
-            margin-top: 10px; /* 调整顶部间距 */
-            background: linear-gradient(135deg, #FFA07A, #FF7F50); /* 温和珊瑚色 */
+            margin-top: 20px;
+            background: linear-gradient(135deg, #FFD700, #FFA500);
             transition: background 0.3s ease-in-out, transform 0.3s ease-in-out;
         }
         .takeout-button:hover {
-            background: linear-gradient(135deg, #FF7F50, #FF6347); /* 略深一点的珊瑚色 */
+            background: linear-gradient(135deg, #FFA500, #FF8C00);
             transform: scale(1.05);
         }
+
         /* 內用按鈕 */
         .dine-in-button {
-            margin-top: 10px; /* 调整顶部间距 */
-            background: linear-gradient(135deg, #4CAF50, #388E3C); /* 柔和绿色 */
+            margin-top: 20px;
+            background: linear-gradient(135deg, #32CD32, #228B22);
             transition: background 0.3s ease-in-out, transform 0.3s ease-in-out;
         }
         .dine-in-button:hover {
-            background: linear-gradient(135deg, #388E3C, #2C6B2F); /* 更深绿色 */
+            background: linear-gradient(135deg, #228B22, #006400);
             transform: scale(1.05);
         }
-            .language-buttons {
-                display: flex;
-                flex-direction: column;
-                gap: 0; /* 移除按钮之间的额外间距 */
-            }
-        </style>
+
         .swiper-container { 
             width: 100vw; 
             height: 100vh; 
@@ -189,10 +184,12 @@
 </head>
 <body>
 
-    <!-- 菜單按鈕 -->
+    <!-- 語言選擇畫面 -->
     <div class="language-selection" id="languageSelection">
         <div class="language-title">
-            用餐方式<br>Dining Options</br><br>食事方法を選択</br>
+            用餐方式
+            <span class="language-subtitle">Dining Options</span>
+            <span class="language-subtitle">食事方法を選択</span>
         </div>
         <div class="language-buttons">
             <button class="language-button dine-in-button" onclick="chooseDineIn()">內用菜單<br>Dine-In Menu</br></button>
@@ -325,29 +322,4 @@
         }
 
         function showModal(lang) {
-            let modalText = document.getElementById("modalText");
-            if (lang === "cn") {
-                modalText.innerHTML = "如果您選好餐點或有任何問題，請尋求服務人員協助。<br> If you have selected your dish or have any questions, please ask the staff for assistance.";
-            } else if (lang === "en") {
-                modalText.innerHTML = "If you have selected your dish or have any questions, please ask the staff for assistance.";
-            } else if (lang === "jp") {
-                modalText.innerHTML = "料理を選んだり、質問があればスタッフにお問い合わせください。";
-            }
-            document.getElementById("modal").style.display = "block";
-            // 8秒后自动关闭
-            setTimeout(function() {
-                closeModal();
-            }, 8000);
-        }
-
-        function closeModal() {
-            document.getElementById("modal").style.display = "none";
-        }
-
-        window.onload = function() {
-            initSwiper();
-        };
-    </script>
-
-</body>
-</html>
+            let modalText = document.getElementBy
