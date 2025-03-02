@@ -213,9 +213,16 @@
         }
 
         function goBack() {
-            document.getElementById("menuContainer").style.display = "none";
-            document.getElementById("menuLanguageSelection").style.display = "none";
-            document.getElementById("languageSelection").style.display = "flex";
+            if (document.getElementById("menuContainer").style.display === "flex") {
+                // 如果在菜單頁面，返回語言選擇頁面
+                document.getElementById("menuContainer").style.display = "none";
+                document.getElementById("menuLanguageSelection").style.display = "none";
+                document.getElementById("languageSelection").style.display = "flex";
+            } else if (document.getElementById("menuLanguageSelection").style.display === "flex") {
+                // 如果在菜單語言選擇頁面，返回主語言選擇頁面
+                document.getElementById("menuLanguageSelection").style.display = "none";
+                document.getElementById("languageSelection").style.display = "flex";
+            }
             document.getElementById("backText").classList.remove("show");
         }
 
