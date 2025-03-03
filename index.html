@@ -28,7 +28,7 @@
         .language-title {
             color: white;
             font-size: 26px;
-            margin-bottom: 10px; /* 控制文字之间的间距 */
+            margin-bottom: 10px;
             font-weight: bold;
         }
         .language-subtitle {
@@ -122,14 +122,14 @@
         .back-icon img {
             width: 30px;
             height: 30px;
-            background-color: transparent; /* 确保背景透明 */
+            background-color: transparent; 
         }
 
         /* 返回到語言選擇 */
         .back-icon-left {
             position: fixed;
             top: 20px;
-            left: 20px; /* 左上角 */
+            left: 20px; 
             cursor: pointer;
             opacity: 0;
             transition: opacity 0.3s ease;
@@ -144,7 +144,7 @@
         .back-icon-left img {
             width: 30px;
             height: 30px;
-            background-color: transparent; /* 确保背景透明 */
+            background-color: transparent; 
         }
 
         /* 提示框 */
@@ -212,7 +212,6 @@
         </div>
         <!-- 左上角的返回按鈕 -->
         <div class="back-icon-left show" id="backIconLeft" onclick="goBackLanguageSelection()">
-            <!-- 使用SVG图标作为返回按钮 -->
             <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M19 12H5"></path>
                 <path d="M12 5l-7 7 7 7"></path>
@@ -220,14 +219,12 @@
         </div>
     </div>
 
-    <!-- Swiper 滑動容器 -->
     <div class="swiper-container" id="menuContainer">
         <div class="swiper-wrapper" id="menuWrapper"></div>
     </div>
 
     <!-- 返回圖示 -->
     <div class="back-icon" id="backIcon" onclick="goBack()">
-        <!-- 使用SVG图标作为返回按钮 -->
         <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M19 12H5"></path>
             <path d="M12 5l-7 7 7 7"></path>
@@ -240,7 +237,6 @@
         <button onclick="closeModal()">確認</button>
     </div>
 
-    <!-- 引入 Swiper.js 的 JS -->
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 
     <script>
@@ -312,7 +308,7 @@
         function goBack() {
             document.getElementById("menuContainer").style.display = "none";
             document.getElementById("menuLanguageSelection").style.display = "flex";
-            document.getElementById("languageSelection").style.display = "none"; // 隐藏主语言选择页面
+            document.getElementById("languageSelection").style.display = "none"; 
             document.getElementById("backIcon").classList.remove("show");
         }
 
@@ -332,7 +328,6 @@
                 modalText.innerHTML = "料理を選んだり、質問があればスタッフにお問い合わせください。";
             }
             document.getElementById("modal").style.display = "block";
-            // 8秒后自动关闭
             setTimeout(function() {
                 closeModal();
             }, 8000);
