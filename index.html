@@ -12,7 +12,7 @@
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, sans-serif; }
         body { background-color: #000; display: flex; align-items: center; justify-content: center; height: 100vh; overflow: hidden; }
 
-        /* 基本樣式 */
+        /* 基本頁面設計 */
         .language-selection, .language-buttons, .back-icon, .modal {
             display: flex;
             align-items: center;
@@ -68,18 +68,19 @@
             transform: scale(1.05);
         }
 
-        /* 外帶、內用按鈕 */
+        /* 內用與外帶按鈕 */
         .takeout-button, .dine-in-button {
             margin-top: 20px;
             transition: background 0.3s ease-in-out, transform 0.3s ease-in-out;
         }
 
         .takeout-button {
-            background: linear-gradient(135deg, #FF8C00, #FF7F32); 
+            background: linear-gradient(135deg, #FF8C00, #FF7F32);
         }
 
         .takeout-button:hover {
-            background: linear-gradient(135deg, #FF7F32, #FF8C00); 
+            background: linear-gradient(135deg, #FF7F32, #FF8C00);
+            transform: scale(1.05);
         }
 
         .dine-in-button {
@@ -88,20 +89,22 @@
 
         .dine-in-button:hover {
             background: linear-gradient(135deg, #228B22, #006400);
+            transform: scale(1.05);
         }
 
-        /* Swiper */
-        .swiper-container { 
-            width: 100vw; 
-            height: 100vh; 
-            display: none; 
+        /* Swiper 容器 */
+        .swiper-container {
+            width: 100vw;
+            height: 100vh;
+            display: none;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
         }
 
-        .swiper-slide { 
-            display: flex; 
-            align-items: center; 
+        .swiper-slide {
+            display: flex;
+            align-items: center;
             justify-content: center;
         }
 
@@ -124,7 +127,9 @@
             z-index: 1001;
         }
 
-        .back-icon.show { opacity: 1; }
+        .back-icon.show {
+            opacity: 1;
+        }
 
         .back-icon img {
             width: 30px;
@@ -132,6 +137,27 @@
             background-color: transparent;
         }
 
+        .back-icon-left {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            cursor: pointer;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 1001;
+        }
+
+        .back-icon-left.show {
+            opacity: 1;
+        }
+
+        .back-icon-left img {
+            width: 30px;
+            height: 30px;
+            background-color: transparent;
+        }
+
+        /* 提示框 */
         .modal {
             position: fixed;
             top: 50%;
@@ -201,6 +227,7 @@
         </div>
     </div>
 
+    <!-- 菜單顯示容器 -->
     <div class="swiper-container" id="menuContainer">
         <div class="swiper-wrapper" id="menuWrapper"></div>
     </div>
@@ -241,29 +268,31 @@
             });
         }
 
+        function showElement(id, show) {
+            document.getElementById(id).style.display = show ? 'flex' : 'none';
+        }
+
         function chooseDineIn() {
-            showElement("menuLanguageSelection", false);
             showElement("languageSelection", false);
-            showElement("menuContainer", true);
-            document.getElementById("backIcon").classList.add("show");
+            showElement("menuLanguageSelection", true);
+            showElement("backIcon", true);
         }
 
         function chooseTakeout() {
             showElement("languageSelection", false);
             showElement("menuContainer", true);
             switchMenu('takeout');
-            document.getElementById("backIcon").classList.add("show");
+            showElement("backIcon", true);
         }
 
         function chooseLanguage(lang) {
             showElement("menuLanguageSelection", false);
             showElement("menuContainer", true);
             switchMenu(lang);
-            document.getElementById("backIcon").classList.add("show");
-        }
-
-        function showElement(id, show) {
-            document.getElementById(id).style.display = show ? 'flex' : 'none';
+            showElement("backIcon", true);
+            setTimeout(function() {
+                showModal(lang);
+            }, 0);
         }
 
         function switchMenu(lang) {
@@ -288,11 +317,33 @@
         function goBack() {
             showElement("menuContainer", false);
             showElement("menuLanguageSelection", true);
+            showElement("languageSelection", false);
+            showElement("backIcon", false);
         }
 
         function goBackLanguageSelection() {
             showElement("menuLanguageSelection", false);
             showElement("languageSelection", true);
+            showElement("backIcon", false);
+        }
+
+        function showModal(lang) {
+            let modalText = document.getElementById("modalText");
+            if (lang === "cn") {
+                modalText.innerHTML = "如果您選好餐點或有任何問題，請尋求服務人員協助。<br> If you have selected your dish or have any questions, please ask the staff for assistance.";
+            } else if (lang === "en") {
+                modalText.innerHTML = "If you have selected your dish or have any questions, please ask the staff for assistance.";
+            } else if (lang === "jp") {
+                modalText.innerHTML = "料理を選んだり、質問があればスタッフにお問い合わせください。";
+            }
+            showElement("modal", true);
+            setTimeout(function() {
+                closeModal();
+            }, 8000);
+        }
+
+        function closeModal() {
+            showElement("modal", false);
         }
 
         window.onload = initSwiper;
