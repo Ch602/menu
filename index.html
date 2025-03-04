@@ -245,18 +245,21 @@
             showElement("menuLanguageSelection", false);
             showElement("languageSelection", false);
             showElement("menuContainer", true);
+            document.getElementById("backIcon").classList.add("show");
         }
 
         function chooseTakeout() {
             showElement("languageSelection", false);
             showElement("menuContainer", true);
             switchMenu('takeout');
+            document.getElementById("backIcon").classList.add("show");
         }
 
         function chooseLanguage(lang) {
             showElement("menuLanguageSelection", false);
             showElement("menuContainer", true);
             switchMenu(lang);
+            document.getElementById("backIcon").classList.add("show");
         }
 
         function showElement(id, show) {
